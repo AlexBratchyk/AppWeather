@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "lesson20",
-    "slug": "lesson20",
+    "slug": "neprostoinc",
+    "owner": "neprostoinc",
     "description": "The weather application will provide users with real-time weather information, forecasts, and other weather-related data, which can help them make better decisions about their day-to-day activities.",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -32,6 +33,9 @@
       "eas": {
         "projectId": "ed28ba91-fd57-46aa-abad-2f295f3f3b76"
       }
+    },
+    "updates": {
+      "useClassicUpdates": true
     }
   }
 }

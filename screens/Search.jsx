@@ -1,5 +1,13 @@
-import {useState, useEffect } from "react";
-import { Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { BACKGROUND_COLOR, NAV_BACKGROUND_COLOR } from "../constants/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,37 +18,38 @@ import Loading from "./Loading";
 const { width } = Dimensions.get("window");
 
 const Search = () => {
-  const [cityVal,setCityVal] = useState('lviv');
+  const [cityVal, setCityVal] = useState("lviv");
 
-  const { tempMode,StateWeatherData,getStateWeatherData } = useTemp();
+  const { tempMode, StateWeatherData, getStateWeatherData } = useTemp();
 
-  useEffect(()=>{
+  useEffect(() => {
     getStateWeatherData(cityVal);
-  },[])
-  const submit =()=>{
+  }, []);
+  const submit = () => {
     getStateWeatherData(cityVal);
-    setCityVal('');
-  }
-  const changeFun = (val)=>{
+    setCityVal("");
+  };
+  const changeFun = (val) => {
     setCityVal(val);
-  } 
+  };
 
   if (StateWeatherData) {
     const { main } = StateWeatherData.weather[0];
-    const {temp,pressure,humidity} = StateWeatherData.main;
-    const {speed} = StateWeatherData.wind;
+    const { temp, pressure, humidity } = StateWeatherData.main;
+    const { speed } = StateWeatherData.wind;
     const date = new Date();
     const hour = date.getHours();
-    
+
     return (
       <View style={styles.main}>
         <View style={styles.searchCity}>
-            <TextInput style={styles.search}
-              placeholder="Search Cities"
-              placeholderTextColor={"rgba(256,256,256,0.4)"}
-              keyboardType='web-search'
-              value={cityVal}
-              onChangeText={changeFun}
+          <TextInput
+            style={styles.search}
+            placeholder="Search Cities"
+            placeholderTextColor={"rgba(256,256,256,0.4)"}
+            keyboardType="web-search"
+            value={cityVal}
+            onChangeText={changeFun}
           />
           <TouchableOpacity onPress={submit} style={styles.searchBtn}>
             <MaterialIcons name="search" size={24} color="#fff" />
@@ -146,23 +155,17 @@ const Search = () => {
 
         {/* Current location */}
         <View style={styles.location}>
-          <Ionicons
-              name="md-location-outline"
-              size={35}
-              color='#3ddc84'
-            />
-          <Text style={styles.locationText}>
-            {StateWeatherData.name}
-          </Text>
+          <Ionicons name="location-outline" size={35} color="#3ddc84" />
+          <Text style={styles.locationText}>{StateWeatherData.name}</Text>
         </View>
 
         {/* Other weather data */}
         <View style={styles.otherData}>
           <View style={styles.Humidity}>
             <MaterialCommunityIcons
-              name='water-outline' 
+              name="water-outline"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
               {humidity} <Text style={styles.unitText}>%</Text>
@@ -171,9 +174,9 @@ const Search = () => {
           </View>
           <View style={styles.Pressure}>
             <MaterialCommunityIcons
-              name='weather-windy'
+              name="weather-windy"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
               {speed} <Text style={styles.unitText}>km/h</Text>
@@ -182,9 +185,9 @@ const Search = () => {
           </View>
           <View style={styles.WindSpeed}>
             <MaterialCommunityIcons
-              name='weather-pouring'
+              name="weather-pouring"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
               {pressure} <Text style={styles.unitText}>hPa</Text>
@@ -192,7 +195,6 @@ const Search = () => {
             <Text style={styles.otherDataText}>pressure</Text>
           </View>
         </View>
-
       </View>
     );
   } else {
@@ -206,29 +208,29 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR,
   },
   searchCity: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
     marginTop: "15%",
     marginHorizontal: "4%",
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
-  search:{
+  search: {
     backgroundColor: NAV_BACKGROUND_COLOR,
     padding: 10,
     flex: 1,
     borderRadius: 30,
     color: "rgba(256,256,256,0.9)",
-    paddingLeft: 25
+    paddingLeft: 25,
   },
   searchBtn: {
     height: 50,
     width: 50,
     backgroundColor: NAV_BACKGROUND_COLOR,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 50,
-    marginLeft: 10
+    marginLeft: 10,
   },
   date: {
     marginLeft: "7%",
@@ -241,16 +243,16 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:'center',
-    marginTop:30,
-    marginBottom:50
+    justifyContent: "center",
+    marginTop: 30,
+    marginBottom: 50,
   },
   locationText: {
     color: "rgba(256,256,256,0.9)",
     fontSize: 30,
     fontWeight: "normal",
     marginLeft: 4,
-    textTransform:'capitalize'
+    textTransform: "capitalize",
   },
   weatherIconView: {
     display: "flex",
@@ -281,7 +283,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 5,
     borderRadius: 30,
-    marginBottom:40
+    marginBottom: 40,
   },
   Humidity: {
     flex: 1,

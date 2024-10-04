@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "lesson20",
-    "slug": "neprostoinc",
-    "owner": "neprostoinc",
+    "slug": "obrat",
+    "owner": "obrat",
     "description": "The weather application will provide users with real-time weather information, forecasts, and other weather-related data, which can help them make better decisions about their day-to-day activities.",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,12 +13,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.neprostostas.lesson20"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -29,13 +26,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "ed28ba91-fd57-46aa-abad-2f295f3f3b76"
-      }
-    },
     "updates": {
       "useClassicUpdates": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a50450b0-b0fe-4359-bc7b-0238bc16d112"
+      }
     }
   }
 }

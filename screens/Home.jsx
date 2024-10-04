@@ -11,12 +11,19 @@ const Home = () => {
   const date = new Date();
   const Full_Date = date.toDateString();
 
-  const { tempMode, weatherData } = useTemp();
+  const { tempMode, weatherData, FetchError } = useTemp();
 
-  if (weatherData) {
-    const { temp, humidity, wind_speed, weather, pressure, dt } =
-      weatherData.current;
-    const { daily } = weatherData;
+  console.log(weatherData);
+  console.log("Fetch error: " + FetchError);
+
+  if (weatherData && weatherData["cod"] != "400") {
+    console.log("If sucsessful");
+    const { temp, humidity, pressure } = weatherData.main;
+    const { speed } = weatherData.wind;
+    const { weather, dt } = weatherData;
+
+    console.log(temp, humidity, speed, weather, pressure, dt);
+    // const { daily } = weatherData;
     const date = new Date();
     const hour = date.getHours();
     const { main } = weather[0];
@@ -24,19 +31,25 @@ const Home = () => {
     const daysData = [];
     const tempData = [];
 
+    //TODO: make this fake method
     {
-      daily.map((e, index) => {
-        if (index >= 1) {
-          const dd = new Date(e.dt * 1000).getUTCDay();
-          daysData.push(days[dd]);
-          tempData.push(e.temp["day"]);
-        }
-      });
+      // main.map((e, index) => {
+      //   // if (index >= 1) {
+      const dd = new Date(dt * 1000).getUTCDay();
+      daysData.push(days[dd]);
+      tempData.push(temp);
+
+      daysData.push(days[dd + 1]);
+      tempData.push(temp - 3);
+      console.log(weatherData.main["temp"]);
+
+      // }
+      // });
     }
 
     return (
       <View style={styles.main}>
-        <StatusBar style='inverted' />
+        <StatusBar style="inverted" />
 
         {/* Present date */}
         <View style={styles.date}>
@@ -149,9 +162,9 @@ const Home = () => {
         <View style={styles.otherData}>
           <View style={styles.Humidity}>
             <MaterialCommunityIcons
-              name='water-outline'
+              name="water-outline"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
               {humidity} <Text style={styles.unitText}>%</Text>
@@ -160,20 +173,20 @@ const Home = () => {
           </View>
           <View style={styles.Pressure}>
             <MaterialCommunityIcons
-              name='weather-windy'
+              name="weather-windy"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
-              {wind_speed} <Text style={styles.unitText}>km/h</Text>
+              {speed} <Text style={styles.unitText}>km/h</Text>
             </Text>
             <Text style={styles.otherDataText}>Wind</Text>
           </View>
           <View style={styles.WindSpeed}>
             <MaterialCommunityIcons
-              name='weather-pouring'
+              name="weather-pouring"
               size={36}
-              color='rgba(256,256,256,0.9)'
+              color="rgba(256,256,256,0.9)"
             />
             <Text style={styles.otherDataValueText}>
               {pressure} <Text style={styles.unitText}>hPa</Text>
@@ -181,9 +194,9 @@ const Home = () => {
             <Text style={styles.otherDataText}>pressure</Text>
           </View>
         </View>
-        
+
         {/* 7-Day Weather Graph */}
-        <View style={styles.DailyData} >
+        <View style={styles.DailyData}>
           <DailyData dayData={daysData} tempData={tempData} />
         </View>
       </View>
